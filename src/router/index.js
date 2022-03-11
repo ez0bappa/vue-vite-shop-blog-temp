@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from '../components/Home/Home.vue';
 import Shop from '../components/Home/Shop/Shop.vue';
+import Cart from '../components/Home/Cart/Cart.vue';
 import PathNotFound from '../components/template/PathNotFound.vue';
 
 const routes = [
@@ -13,6 +14,11 @@ const routes = [
         path: '/shop',
         name: 'Shop',
         component: Shop,
+    },
+    {
+        path: '/cart',
+        name: 'Cart',
+        component: Cart,
     },
     {
         path: '/:pathMatch(.*)*',

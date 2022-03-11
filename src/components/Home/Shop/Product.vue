@@ -89,8 +89,8 @@ function addToCart(item: any) {
             <a href="#">{{ product.name }}</a>
           </h3>
           <div class="price">
-            $16.00
-            <span>$20.00</span>
+            ${{ product.price }}
+            <span>${{ product.marketPrice }}</span>
           </div>
           <button @click="addToCart(product)" class="btn btn-outline-secondary">
               Cart

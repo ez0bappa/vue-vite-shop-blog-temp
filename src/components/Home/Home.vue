@@ -8,8 +8,6 @@
     let cart = computed(() => {
         return cartStore.$state.cart
     });
-
-    console.log(cart.value)
 </script>
 
 <template>
@@ -26,7 +24,7 @@
                     </div>
                     <div class="cart-btn" style="padding: 7px;">
                         <button class="btn btn-outline-secondary" type="submit">
-                            Cart
+                            <router-link to="/cart">Cart</router-link>
                         <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart.length }}</span>
                     </button>
                     </div>
