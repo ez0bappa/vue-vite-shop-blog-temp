@@ -1,9 +1,23 @@
+<script setup lang="ts">
+    import { defineComponent } from 'vue';
+    import { useCartStore } from '../../store/Cart.js';
+    import { computed } from 'vue';
+
+    const cartStore = useCartStore();
+
+    let cart = computed(() => {
+        return cartStore.$state.cart
+    });
+
+    console.log(cart.value)
+</script>
+
 <template>
     <div class="home-page">
        <div class="navbar-block">
             <header>
                 <div class="logo">
-                    <router-link to="/">Logo</router-link>
+                    <small><router-link to="/">Logo</router-link></small>
                 </div>
                 <i class="material-icons">=</i>
                 <nav>
@@ -11,7 +25,10 @@
                         <router-link to="/shop">Shop</router-link>
                     </div>
                     <div class="cart-btn" style="padding: 7px;">
-                        <button class="btn btn-outline-dark" type="submit"><i class="bi-cart-fill me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill">0</span></button>
+                        <button class="btn btn-outline-secondary" type="submit">
+                            Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart.length }}</span>
+                    </button>
                     </div>
                 </nav>
                 <div class="black"></div>
@@ -20,14 +37,6 @@
         <router-view />
     </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-    export default defineComponent({
-        name: 'Home'
-    })
-</script>
 
 <style scoped>
 /* For header content template */
@@ -64,7 +73,7 @@ header > .logo {
     font-size: 28px;
     line-height: 50px;
     padding: 0 20px;
-    background-color: #212121;
+    background-color: #67b8b8;
 }
 
 header > nav {

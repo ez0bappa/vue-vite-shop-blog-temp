@@ -69,7 +69,7 @@ export const useProductStore = defineStore("Products", {
     },
     getters: {
         getProducts(state) {
-            return state.produ
+            return state.products
         }
     },
 })

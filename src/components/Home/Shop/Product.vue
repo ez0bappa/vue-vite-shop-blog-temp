@@ -1,9 +1,45 @@
 <script setup lang="ts">
-import { defineProps, reactive } from "vue";
 
-const props = defineProps({
-  product: String,
+import { useCartStore } from '../../../store/Cart.js'
+import { computed } from 'vue';
+
+// const productProps = defineProps<{ product: string }>()
+const productProps = defineProps<{ product: {
+  id: BigInteger,
+  name: String,
+  marketPrice: BigInt,
+  price: BigInteger,
+  shortdesc: String,
+  url: String
+} }>()
+
+const cartStore = useCartStore();
+
+let cart = computed(() => {
+    return cartStore.$state.cart
 });
+
+var itemAlreadyInCart = computed(() => {
+  let inCart = false;
+
+  cart.value.forEach((item: any) => {
+    if(item.id == productProps.product.id){
+      inCart = true;
+    }
+  });
+
+  return inCart;
+})
+
+function addToCart(item: any) {
+  if(!itemAlreadyInCart.value) {
+      addToCart: cartStore.addToCart(item)
+  } else {
+      alert('Item already added to cart')
+  }
+}
+
+
 </script>
 
 <template>
@@ -55,7 +91,9 @@ const props = defineProps({
             $16.00
             <span>$20.00</span>
           </div>
-          <a class="add-to-cart" href="">+ Add To Cart</a>
+          <button @click="addToCart(product)" class="btn btn-outline-secondary">
+              Cart
+          </button>
         </div>
       </div>
     </div>
