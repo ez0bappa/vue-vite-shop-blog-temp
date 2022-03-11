@@ -35,7 +35,8 @@ function addToCart(item: any) {
   if(!itemAlreadyInCart.value) {
       addToCart: cartStore.addToCart(item)
   } else {
-      alert('Item already added to cart')
+      alert(`${item.name} already exists in your cart`)
+      console.log(this.$toast)
   }
 }
 
