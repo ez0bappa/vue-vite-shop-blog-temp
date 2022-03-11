@@ -9,6 +9,10 @@ export const useCartStore = defineStore("Cart", {
     actions: {
         async addToCart(item) {
             this.cart.push(item)
+        },
+
+        async deleteItemInCart(item) { 
+            this.cart.splice(this.cart.indexOf(item) ,1);
         }
     },
     getters: {
