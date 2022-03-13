@@ -1,13 +1,17 @@
 <script setup lang="ts">
     import { useCartStore } from '../../../store/Cart';
-    import { computed, onMounted, reactive, ref, watchEffect } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
 
     const cartStore = useCartStore();
-    const itemQty = ref(2);
+    const itemQty = ref(1);
 
-    let cart = computed(() => {
+    let cart = computed(function () {
         return cartStore.$state.cart
     });
+
+    // onMounted(() => {
+    //     console.log('Cart items are : ', cart.value)
+    // })
 
     const removeItem = (item: any) => {
         if(item) {
@@ -15,17 +19,26 @@
         }
     }
 
+    const updateCartItem = (item: any) => {
+        if(item) {
+            item.quantity = item.quantity + 1;
+            cartStore.updateCartItem(item)
+        }
+    }
+
     let totalPrice = computed(function(){
+        // console.log(cart.value)
         return cart.value.reduce((total: any, next: any) => {
-            console.log(total, next.price)
-            return total + (next.price)
+            // console.log('total', total + next.price)
+            return total + (next.price * next.quantity)
         }, 0)
     });
-
-    watchEffect(() => {
-        
-    }) 
     
+    let itemQuantity = computed(function(){
+        let get_product = cart.value.filter((item: any) => item.id == cart.value);
+        console.log(get_product)
+        return get_product;
+    })
 </script>
 
 <template>
@@ -46,7 +59,6 @@
                                             <hr class="my-4">
 
                                             <!-- Loop from here Start -->
-                                            <!-- <pre>{{ JSON.stringify(cart, null, 2) }}</pre> -->
                                             <div class="product-item-elems" v-if="totalPrice > 0">
                                                 <div 
                                                 v-for="(item, index) in cart" :key="index"
@@ -59,23 +71,28 @@
                                                         <h6 class="text-black mb-0">{{ item.name }}</h6>
                                                     </div>
                                                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                        <button class="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                                            <i class="fas fa-minus"></i>
+                                                        <button class="btn btn-link px-2">
+                                                            <fa icon="minus" />
                                                         </button>
 
+                                                        <div>
+                                                        <pre>{{ JSON.stringify(itemQuantity, null, 2) }}</pre>
+                                                        </div>
+                                                        
                                                         <input
-                                                            :v-model="itemQty"
+                                                            :v-model="itemQuantity"
                                                             id="form1" min="0" name="quantity" value="1" type="number"
                                                             class="form-control form-control-sm" />
-
-                                                        <button class="btn btn-link px-2"
-                                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                                            <i class="fas fa-plus"></i>
+                                                        <!-- <div class="col-md-2 text-center">{{itemQuantity}}</div> -->
+                                                        <button @click="updateCartItem(item)" class="btn btn-link px-2">
+                                                            <fa icon="plus" />
                                                         </button>
                                                     </div>
-                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                                        <h6 class="mb-0">{{ item.price }}</h6>
+                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="display: contents;">
+                                                        <span class="badge badge-primary badge-pill" data-v-d486db4e="" style="background: rgb(95, 158, 160);">
+                                                            Quantity - {{ itemQty }}
+                                                        </span>
+                                                        <h6 class="mb-0">$ {{ item.price }}</h6>
                                                     </div>
                                                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                                         <!-- <a href="#!" class="text-muted"><fa icon="trash" /></a> -->
@@ -112,6 +129,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th scope="col">Name</th>
+                                                        <th scope="col">Quantity</th>
                                                         <th scope="col">price</th>
                                                     </tr>
                                                 </thead>
@@ -119,11 +137,13 @@
                                                     <tr v-for="(item, index) in cart" :key="index">
                                                         <td>{{ item.id }}</td>
                                                         <td>{{ item.name }}</td>
-                                                        <td>{{ item.price }}</td>
+                                                        <td>{{ item.quantity }}</td>
+                                                        <td>{{ item.quantity * item.price }}</td>
                                                     </tr>
                                                 </tbody>
                                                 <td></td>
-                                                <td>Total</td>
+                                                <td></td>
+                                                <td>Total : </td>
                                                 <td>{{ totalPrice }}</td>
                                             </table>
                                         </div>

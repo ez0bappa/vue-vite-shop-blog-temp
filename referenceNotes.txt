@@ -1,0 +1,3 @@
+//Follows this references
+
+1. https://auth0.com/blog/state-management-in-vue-3-applications/
