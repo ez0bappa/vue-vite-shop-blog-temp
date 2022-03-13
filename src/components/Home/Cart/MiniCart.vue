@@ -17,7 +17,7 @@
 </script>
 
 <template>
-    <div class="mini-cart">
+    <div class="mini-cart" v-if="totalPrice > 0">
         <div class="card-body">
             <h5 class="card-title">Your Cart</h5>
             <p v-if="cart.length == 0"> Your Cart is Empty</p>

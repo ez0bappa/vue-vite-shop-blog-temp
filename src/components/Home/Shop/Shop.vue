@@ -74,6 +74,7 @@ let searchedProducts = computed(() => {
                 </div>
             </div>
         </div>
+        
 
         <footer class="container-fluid"  style="background-color: grey">
             <p>Footer Text</p>
