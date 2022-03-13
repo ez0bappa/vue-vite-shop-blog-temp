@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useProductStore } from '../../../store/Product'
 import Product from './Product.vue'
 import MiniCart from '../Cart/MiniCart.vue'
 
 const store = useProductStore();
 
+const search = ref('');
+
 let products = computed(() => {
     return store.$state.products
 })
 
-let singleProduct = computed(() => {
-    return products.value.filter((product: any) => {
-        return product;
+let searchedProducts = computed(() => {
+    return products.value.filter((post: any) => {
+        return post.name.toLowerCase().includes(search.value.toLowerCase())
     })
 })
-
-// console.log(singleProduct)
 </script>
 
 <template>
@@ -25,7 +25,7 @@ let singleProduct = computed(() => {
             <div class="row">
                 <div class="col-md-9 pt-5">
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                        <Product v-for="product in singleProduct" :product="product" :key="product.id" />
+                        <Product v-for="product in searchedProducts" :product="product" :key="product.id" />
                     </div>
                 </div>
                 <div class="col-md-3 pt-5">
@@ -45,7 +45,8 @@ let singleProduct = computed(() => {
                         <li><a href="#section3">Photos</a></li>
                     </ul><br>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search Product..">
+                        <input type="text" v-model="search" class="form-control" placeholder="Search Product..">
+                        <!-- <pre>{{ JSON.stringify(search, null, 2) }}</pre> -->
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -57,11 +58,11 @@ let singleProduct = computed(() => {
                 <div class="col-sm-10">
                     <h4><small>RECENT PRODUCTS</small></h4>
                     <hr>
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-9 pt-5">
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                                    <Product v-for="product in singleProduct" :product="product" :key="product.id" />
+                                    <Product v-for="product in searchedProducts" :product="product" :key="product.id" />
                                 </div>
                             </div>
                             <div class="col-md-3 pt-5">

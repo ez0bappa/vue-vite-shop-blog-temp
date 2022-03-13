@@ -10,7 +10,7 @@ const productProps = defineProps<{ product: {
   marketPrice: BigInt,
   price: BigInteger,
   shortdesc: String,
-  url: String
+  url: string
 } }>()
 
 const cartStore = useCartStore();
@@ -47,7 +47,7 @@ function addToCart(item: any) {
   <!-- <pre>{{ JSON.stringify(product, null, 2) }}</pre> -->
   <div class="col-md-3 col-sm-6">
     <div class="single-product">
-      <div class="product-grid">
+      <!-- <div class="product-grid">
         <div class="product-image">
           <a href="#">
             <img
@@ -59,31 +59,9 @@ function addToCart(item: any) {
               src="https://www.w3schools.com/bootstrap4/img_avatar3.png"
             />
           </a>
-          <!-- <ul class="social">
-            <li>
-              <a href="" data-tip="Quick View"><i class="fa fa-search"></i></a>
-            </li>
-            <li>
-              <a href="" data-tip="Add to Wishlist"
-                ><i class="fa fa-shopping-bag"></i
-              ></a>
-            </li>
-            <li>
-              <a href="" data-tip="Add to Cart"
-                ><i class="fa fa-shopping-cart"></i
-              ></a>
-            </li>
-          </ul> -->
           <span class="product-new-label">Sale</span>
           <span class="product-discount-label">20%</span>
         </div>
-        <ul class="rating">
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star"></li>
-          <li class="fa fa-star disable"></li>
-        </ul>
         <div class="product-content">
           <h3 class="title">
             <a href="#">{{ product.name }}</a>
@@ -96,6 +74,20 @@ function addToCart(item: any) {
               Cart
           </button>
         </div>
+      </div> -->
+      <div class="card mb-4">
+          <img :src="product.url" class="card-img-top" alt="...">
+          <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">
+              ${{product.price}}
+              <br/>
+              <small>
+              {{product.shortdesc}}
+              </small>
+          </p>
+          <button @click="addToCart(product)" class="btn btn-primary btn-block" :disabled="itemAlreadyInCart">{{itemAlreadyInCart? "Added" : "Add to Cart"}}</button>
+          </div>
       </div>
     </div>
   </div>

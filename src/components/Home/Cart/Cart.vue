@@ -71,34 +71,29 @@
                                                 v-for="(item, index) in cart" :key="index"
                                                 class="row mb-4 d-flex justify-content-between align-items-center">
                                                     <div class="col-md-2 col-lg-2 col-xl-2">
-                                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp" class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                        <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img5.webp" class="img-fluid rounded-3" alt="Cotton T-shirt"> -->
+                                                        <img :src="item.url" class="card-img-top" alt="...">
                                                     </div>
                                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                                         <!-- <h6 class="text-muted">Shirt</h6> -->
                                                         <h6 class="text-black mb-0">{{ item.name }}</h6>
                                                     </div>
                                                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                        <button @click="decreaseItemQty(item)" class="btn btn-link px-2">
+                                                        <button @click="decreaseItemQty(item)" class="btn btn-link No shadow" style="padding: 5px; height: 35px; width: 35px;">
                                                             <fa icon="minus" />
                                                         </button>
 
-                                                        <div>
-                                                            <div class="col-md-5 text-center mt-1">{{item.quantity}}</div>
+                                                        <div class="item-quant" style="padding: 5px !important; width: 35px">
+                                                            <div class="text-center">{{item.quantity}}</div>
                                                             <!-- <pre>{{ JSON.stringify(item.quantity, null, 2) }}</pre> -->
                                                         </div>
-                                                        
-                                                        <!-- <input
-                                                            :v-model="itemQuantity"
-                                                            id="form1" min="0" name="quantity" value="1" type="number"
-                                                            class="form-control form-control-sm" /> -->
-
-                                                        <button @click="increateItemQty(item)" class="btn btn-link">
+                                                        <button @click="increateItemQty(item)" class="btn btn-link No shadow">
                                                             <fa icon="plus" />
                                                         </button>
                                                     </div>
                                                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="display: contents;">
                                                         <span class="badge badge-primary badge-pill" data-v-d486db4e="" style="background: rgb(95, 158, 160);">
-                                                            Quantity - {{ itemQty }}
+                                                            Quantity - {{ item.quantity }}
                                                         </span>
                                                         <h6 class="mb-0">$ {{ item.price }}</h6>
                                                     </div>
@@ -124,7 +119,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 bg-grey">
+                                    <div class="col-lg-4 bg-grey" v-if="totalPrice > 0">
                                         <div class="p-5">
                                         <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
                                         <hr class="my-4">

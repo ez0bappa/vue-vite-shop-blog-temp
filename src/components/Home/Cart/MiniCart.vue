@@ -33,7 +33,7 @@
         </ul>
 
         <div class="card-body">
-            <router-link to="/shop" class="btn btn-primary btn-block">Checkout</router-link>
+            <router-link to="/cart" class="btn btn-primary btn-block">Checkout</router-link>
         </div>
     </div>
 </template>
