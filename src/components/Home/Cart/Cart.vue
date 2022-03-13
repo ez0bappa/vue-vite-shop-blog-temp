@@ -19,10 +19,17 @@
         }
     }
 
-    const updateCartItem = (item: any) => {
+    const increateItemQty = (item: any) => {
         if(item) {
             item.quantity = item.quantity + 1;
-            cartStore.updateCartItem(item)
+            cartStore.increateItemQty(item)
+        }
+    }
+
+    const decreaseItemQty = (item: any) => {
+        if(item.quantity != 0) {
+            item.quantity = item.quantity - 1;
+            cartStore.decreaseItemQty(item)
         }
     }
 
@@ -71,20 +78,21 @@
                                                         <h6 class="text-black mb-0">{{ item.name }}</h6>
                                                     </div>
                                                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                                                        <button class="btn btn-link px-2">
+                                                        <button @click="decreaseItemQty(item)" class="btn btn-link px-2">
                                                             <fa icon="minus" />
                                                         </button>
 
                                                         <div>
-                                                        <pre>{{ JSON.stringify(itemQuantity, null, 2) }}</pre>
+                                                            <div class="col-md-5 text-center mt-1">{{item.quantity}}</div>
+                                                            <!-- <pre>{{ JSON.stringify(item.quantity, null, 2) }}</pre> -->
                                                         </div>
                                                         
-                                                        <input
+                                                        <!-- <input
                                                             :v-model="itemQuantity"
                                                             id="form1" min="0" name="quantity" value="1" type="number"
-                                                            class="form-control form-control-sm" />
-                                                        <!-- <div class="col-md-2 text-center">{{itemQuantity}}</div> -->
-                                                        <button @click="updateCartItem(item)" class="btn btn-link px-2">
+                                                            class="form-control form-control-sm" /> -->
+
+                                                        <button @click="increateItemQty(item)" class="btn btn-link">
                                                             <fa icon="plus" />
                                                         </button>
                                                     </div>

@@ -17,7 +17,15 @@ export const useCartStore = defineStore("Cart", {
             this.cart.splice(this.cart.indexOf(item) ,1);
         },
 
-        async updateCartItem(updatedItem) {
+        async increateItemQty(updatedItem) {
+            this.cart = this.cart.map((cartItem) => {
+                if(cartItem.id == updatedItem.id) {
+                    return updatedItem
+                }
+                return cartItem;
+            })
+        },
+        async decreaseItemQty(updatedItem) {
             this.cart = this.cart.map((cartItem) => {
                 if(cartItem.id == updatedItem.id) {
                     return updatedItem
