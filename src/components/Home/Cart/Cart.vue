@@ -27,7 +27,9 @@
     }
 
     const decreaseItemQty = (item: any) => {
-        if(item.quantity != 0) {
+        if(item.quantity == 1) {
+            return
+        } else {
             item.quantity = item.quantity - 1;
             cartStore.decreaseItemQty(item)
         }
@@ -95,7 +97,7 @@
                                                         <span class="badge badge-primary badge-pill" data-v-d486db4e="" style="background: rgb(95, 158, 160);">
                                                             Quantity - {{ item.quantity }}
                                                         </span>
-                                                        <h6 class="mb-0">$ {{ item.price }}</h6>
+                                                        <h6 class="mb-0">$ {{ item.quantity * item.price }}</h6>
                                                     </div>
                                                     <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                                         <!-- <a href="#!" class="text-muted"><fa icon="trash" /></a> -->
@@ -121,66 +123,83 @@
                                     </div>
                                     <div class="col-lg-4 bg-grey" v-if="totalPrice > 0">
                                         <div class="p-5">
-                                        <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                                        <hr class="my-4">
+                                            <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                                            <hr class="my-4">
 
-                                        <div class="glimpse-product-data">
-                                            <!-- <h5 class="text-uppercase">{{ item.name }}</h5>
-                                            <h5>{{ item.price }}</h5> -->
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Quantity</th>
-                                                        <th scope="col">price</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr v-for="(item, index) in cart" :key="index">
-                                                        <td>{{ item.id }}</td>
-                                                        <td>{{ item.name }}</td>
-                                                        <td>{{ item.quantity }}</td>
-                                                        <td>{{ item.quantity * item.price }}</td>
-                                                    </tr>
-                                                </tbody>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Total : </td>
-                                                <td>{{ totalPrice }}</td>
-                                            </table>
-                                        </div>
-
-                                        <h5 class="text-uppercase mb-3">Shipping</h5>
-
-                                        <div class="mb-4 pb-2">
-                                            <select class="select">
-                                            <option value="1">Standard-Delivery- €5.00</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                            <option value="4">Four</option>
-                                            </select>
-                                        </div>
-
-                                        <h5 class="text-uppercase mb-3">Give code</h5>
-
-                                        <div class="mb-5">
-                                            <div class="form-outline">
-                                            <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                                            <label class="form-label" for="form3Examplea2">Enter your code</label>
+                                            <div class="glimpse-product-data">
+                                                <!-- <h5 class="text-uppercase">{{ item.name }}</h5>
+                                                <h5>{{ item.price }}</h5> -->
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th scope="col">Name</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">price</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(item, index) in cart" :key="index">
+                                                            <td>{{ item.id }}</td>
+                                                            <td>{{ item.name }}</td>
+                                                            <td>{{ item.quantity }}</td>
+                                                            <td>{{ item.quantity * item.price }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Total : </td>
+                                                    <td>{{ totalPrice }}</td>
+                                                </table>
                                             </div>
-                                        </div>
 
-                                        <hr class="my-4">
+                                            <div class="mode-of-payment">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <h5 class="text-uppercase mb-3">Shipping</h5>    
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="mb-4 pb-2">
+                                                            <div class="dropdown">
+                                                                <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                                    Dropdown button
+                                                                </button>
+                                                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                                                    <li><a class="dropdown-item active" href="#">Action</a></li>
+                                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                                                    <li><hr class="dropdown-divider"></li>
+                                                                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                                                                </ul> -->
+                                                            </div>
+                                                            <select class="select w-100">
+                                                                <option value="1">Standard-Delivery- €5.00</option>
+                                                                <option value="2">Premium-Delivery- €15.00</option>
+                                                                <option value="3">Free-Delivery- €25.00</option>
+                                                                <option value="4">San QR- €1.00</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                        <div class="d-flex justify-content-between mb-5">
-                                            <h5 class="text-uppercase">Total price</h5>
-                                            <h5>€ {{ totalPrice }}</h5>
-                                        </div>
+                                            <h5 class="text-uppercase mb-3">Give code</h5>
 
-                                        <button type="button" class="btn btn-dark btn-block btn-lg"
-                                            data-mdb-ripple-color="dark">Register</button>
+                                            <div class="mb-5">
+                                                <div class="form-outline">
+                                                <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Examplea2">Enter your code</label>
+                                                </div>
+                                            </div>
 
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between mb-5">
+                                                <h5 class="text-uppercase">Total price</h5>
+                                                <h5>€ {{ totalPrice }}</h5>
+                                            </div>
+
+                                            <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Buy</button>
                                         </div>
                                     </div>
                                 </div>

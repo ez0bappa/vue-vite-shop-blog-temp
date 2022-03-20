@@ -22,6 +22,12 @@
                     <div>
                         <router-link to="/shop">Shop</router-link>
                     </div>
+                    <div>
+                        <router-link to="/contact">Contact</router-link>
+                    </div>
+                    <div>
+                        <router-link to="/register">Register</router-link>
+                    </div>
                     <div class="cart-btn" style="padding: 7px;">
                         <button class="btn btn-outline-secondary" type="submit">
                             <router-link to="/cart">Cart</router-link>
