@@ -4,34 +4,29 @@ import { defineStore } from "pinia";
 export const useUserStore = defineStore("User", {
     state: () => {
         return {
-            // name: '',
-            // email: '',
-            // password: ''
             user: null
         }
     },
 
     actions: {
-        async registerUser(userData) {
-            localStorage.setItem('user', JSON.stringify(userData))
-            axios.defaults.headers.common['Authorization'] = `Bearer ${
-                userData.token
-            }`
+        async signUp(userData) {
+           let result = await axios.post('http://localhost:8000/users', userData)
+            if(result.status === 201) {
+                localStorage.setItem("user-info", JSON.stringify(result.data))
+                // this.$router.push({name: 'Home'})
+                window.location = "http://localhost:3000/login";
+            }
+        },
 
-            console.log(localStorage.getItem('user'))
-
-            // return axios.post('//localhost:3000/register', userData).then(
-            //     ({ data }) => {
-            //         console.log(data)
-            //         state.user = data
-            //         localStorage.setItem('user', JSON.stringify(userData))
-            //         axios.defaults.headers.common['Authorization'] = `Bearer ${
-            //             userData.token
-            //         }`
-            //         console.log(localStorage.getItem('user'))
-            //     }
-            // )
-        }
+        async login(userdata) {
+            let result = await axios.get(`http://localhost:8000/users?email=${userdata.email}&password=${userdata.password}`)
+            if(result.status === 200 && result.data.length > 0) {
+                localStorage.setItem('user-info', JSON.stringify(result.data[0]))
+                window.location = "http://localhost:3000/dashboard";
+            } else {
+                alert('Bad credentials')
+            }
+        },
     },
 
     getters: {

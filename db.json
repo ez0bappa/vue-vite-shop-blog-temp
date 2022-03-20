@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "id": "_.ilrc4ip7",
+      "name": "Bappa",
+      "email": "bappa@gmail.com",
+      "password": "12345",
+      "confirmPassword": "12345"
+    },
+    {
+      "id": "_VHG4R9"
+    },
+    {
+      "id": "mivxM0y"
+    },
+    {
+      "id": "eD8kgwD"
+    },
+    {
+      "id": "_.cu0mmgsx",
+      "name": "New Bappa",
+      "email": "newbappa@gmail.com",
+      "password": "12345",
+      "confirmPassword": "12345"
+    }
+  ]
+}

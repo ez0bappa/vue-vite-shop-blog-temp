@@ -3,6 +3,8 @@ import Home from '../components/Home/Home.vue';
 import Shop from '../components/Home/Shop/Shop.vue';
 import Contact from '../components/Home/Contact/Contact.vue';
 import Register from '../components/Home/Auth/Register.vue';
+import Login from '../components/Home/Auth/Login.vue';
+import Dashboard from '../components/Home/User/Dashboard.vue';
 import PhoneContacts from '../components/Home/Contact/PhoneContacts.vue';
 import About from '../components/Home/Contact/About.vue';
 import Cart from '../components/Home/Cart/Cart.vue';
@@ -23,6 +25,16 @@ const routes = [
         path: '/register',
         name: 'Register',
         component: Register,
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login,
+    },
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: Dashboard,
     },
     {
         path: '/contact',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { ref } from 'vue'
+    import { onMounted, ref } from 'vue'
     import gsap from 'gsap'
 
     const icons = ref([
@@ -21,6 +21,15 @@
         delay: el.dataset.index * 0.2
       })
     }
+
+    onMounted(() => {
+        let user = localStorage.getItem('user-info')
+
+        if(!user) {
+            // @ts-ignore
+            window.location = "http://localhost:3000/login";
+        }
+    })
 </script>
 
 <template>

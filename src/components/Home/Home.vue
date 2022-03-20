@@ -1,13 +1,21 @@
 <script setup lang="ts">
-    import { defineComponent } from 'vue';
+    import { defineComponent, onMounted } from 'vue';
     import { useCartStore } from '../../store/Cart.js';
+    import { useUserStore } from '../../store/User.js'
     import { computed } from 'vue';
 
     const cartStore = useCartStore();
+    const userStore = useUserStore();
 
     let cart = computed(() => {
         return cartStore.$state.cart
     });
+
+    function logout() {
+        localStorage.clear();
+        window.location = "http://localhost:3000/";
+    }
+    
 </script>
 
 <template>
@@ -33,6 +41,9 @@
                             <router-link to="/cart">Cart</router-link>
                         <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart.length }}</span>
                     </button>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary mt-1" :onclick="logout">Logout</button>
                     </div>
                 </nav>
                 <div class="black"></div>
