@@ -1,3 +1,6 @@
 //Follows this references
 
 1. https://auth0.com/blog/state-management-in-vue-3-applications/
+
+2. JSON SERVER : 
+> json-server --watch db.json --port 8000      to run server with custom port 8000

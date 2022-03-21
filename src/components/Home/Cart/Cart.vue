@@ -9,10 +9,6 @@
         return cartStore.$state.cart
     });
 
-    // onMounted(() => {
-    //     console.log('Cart items are : ', cart.value)
-    // })
-
     const removeItem = (item: any) => {
         if(item) {
             deleteItemInCart: cartStore.deleteItemInCart(item)
@@ -48,6 +44,16 @@
         console.log(get_product)
         return get_product;
     })
+
+    function checkout() {
+        console.log('checkout')
+        let user = localStorage.getItem('user-info')
+
+        if(!user) {
+            // @ts-ignore
+            window.location = "http://localhost:3000/login";
+        }
+    }
 </script>
 
 <template>
@@ -199,7 +205,9 @@
                                                 <h5>€ {{ totalPrice }}</h5>
                                             </div>
 
-                                            <button type="button" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">Buy</button>
+                                            <button type="button" v-on:click="checkout" class="btn btn-dark btn-block btn-lg" data-mdb-ripple-color="dark">
+                                                Buy
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
