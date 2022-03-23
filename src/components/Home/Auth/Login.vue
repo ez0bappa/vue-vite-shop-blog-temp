@@ -25,13 +25,11 @@
     // }
 
     const firebaseSignIn = () => {
-        console.log('firebaseSignIn')
         const auth = getAuth()          //from firebase auth
 
         if(email.value || password.value) {
             signInWithEmailAndPassword(auth, email.value, password.value)
             .then((data: any) => {
-                console.log("Successfully registered!...", data)
                 // localStorage.setItem("user-info", JSON.stringify(result.data))
                 router.push("/dashboard");
             })
