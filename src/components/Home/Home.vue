@@ -1,19 +1,52 @@
 <script setup lang="ts">
-    import { defineComponent, onMounted } from 'vue';
+    import { defineComponent, onMounted, ref } from 'vue';
     import { useCartStore } from '../../store/Cart.js';
     import { useUserStore } from '../../store/User.js'
     import { computed } from 'vue';
+    import { useRouter } from 'vue-router'
+    import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
+    const router = useRouter();
     const cartStore = useCartStore();
     const userStore = useUserStore();
+    const isLoggedIn = ref(false);
+    const authenticatedUser = ref('');
 
     let cart = computed(() => {
         return cartStore.$state.cart
     });
 
-    function logout() {
+    // @ts-ignore
+    let auth;
+    onMounted(() => {
+        auth = getAuth();
+        // @ts-ignore
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                const auth = getAuth();
+                const user = auth.currentUser;
+                const authenticatedUser = user;
+                if(authenticatedUser) {
+                    console.log('home- ', authenticatedUser)
+                    isLoggedIn.value = true;
+                }
+            } else {
+                isLoggedIn.value = false;
+            }
+        })
+    })
+
+    const logout = () => {
         localStorage.clear();
-        window.location = "http://localhost:3000/";
+        router.push("/");
+    }
+
+    const handleSignOut = () => {
+        const auth = getAuth();
+        // @ts-ignore
+        signOut(auth).then(() => {
+            router.push('/login')
+        })
     }
     
 </script>
@@ -43,7 +76,11 @@
                     </button>
                     </div>
                     <div>
-                        <button class="btn btn-primary mt-1" :onclick="logout">Logout</button>
+                        <!-- <div class="test-block" v-if="isLoggedIn">
+                            <pre>{{ JSON.stringify(authenticatedUser, null, 2) }}</pre>
+                        </div> -->
+                        <button class="btn btn-primary mt-1" v-if="isLoggedIn" :onclick="logout">Logout</button>
+                        <button class="btn btn-primary mt-1" v-if="isLoggedIn" :onclick="handleSignOut">Firebase SignOut</button>
                     </div>
                 </nav>
                 <div class="black"></div>

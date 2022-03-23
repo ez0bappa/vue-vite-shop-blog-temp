@@ -10,7 +10,7 @@ export const useUserStore = defineStore("User", {
 
     actions: {
         async signUp(userData) {
-           let result = await axios.post('http://localhost:8000/users', userData)
+            let result = await axios.post('http://localhost:8000/users', userData)
             if(result.status === 201) {
                 localStorage.setItem("user-info", JSON.stringify(result.data))
                 // this.$router.push({name: 'Home'})

@@ -23,12 +23,14 @@
     }
 
     onMounted(() => {
-        let user = localStorage.getItem('user-info')
+        // We can implement this using router guards in router js file
 
-        if(!user) {
-            // @ts-ignore
-            window.location = "http://localhost:3000/login";
-        }
+        // let user = localStorage.getItem('user-info')
+
+        // if(!user) {
+        //     // @ts-ignore
+        //     window.location = "http://localhost:3000/login";
+        // }
     })
 </script>
 
