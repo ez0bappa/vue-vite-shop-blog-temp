@@ -3,6 +3,7 @@
     import { onMounted, ref } from 'vue';
     import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
     import { useRouter } from 'vue-router'
+    import db from '../../../firebaseDb.js'
 
     const router = useRouter();
     const store = useUserStore();
@@ -30,6 +31,7 @@
     }
 
     const firebaseSignUp = () => {
+        // Insert data in authentication section in firebase
         const auth  = getAuth();
         createUserWithEmailAndPassword(auth, email.value, password.value)
             .then((user: any) => {
@@ -41,6 +43,9 @@
                 console.log(error.code)
                 alert(`Error - ${error.message}`);
             })
+
+        // Insert data inside a custom created collection in firebase
+        // console.log(db)
     }
 
     const gmailFirebaseSignUP = () => {
@@ -132,7 +137,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
             </form>
         </div>

@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from '../components/Home/Home.vue';
 import Shop from '../components/Home/Shop/Shop.vue';
+import Products from '../components/Home/Products/Products.vue';
+import ProductLists from '../components/Home/Products/ProductLists.vue';
+import AddProduct from '../components/Home/Products/AddProduct.vue';
 import Contact from '../components/Home/Contact/Contact.vue';
 import Register from '../components/Home/Auth/Register.vue';
 import Login from '../components/Home/Auth/Login.vue';
@@ -22,6 +25,23 @@ const routes = [
         path: '/shop',
         name: 'Shop',
         component: Shop,
+    },
+    {
+        path: '/products',
+        name: 'Products',
+        component: Products,
+        children: [
+            {
+                path: '/product-lists',
+                name: 'ProductLists',
+                component: ProductLists,
+            },
+            {
+                path: '/add-product',
+                name: 'AddProduct',
+                component: AddProduct,
+            },
+        ]
     },
     {
         path: '/register',

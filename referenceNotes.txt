@@ -4,3 +4,8 @@
 
 2. JSON SERVER : 
 > json-server --watch db.json --port 8000      to run server with custom port 8000
+
+
+DESIGN
+
+1. https://bbbootstrap.com/snippets/bootstrap-5-sidebar-menu-toggle-button-34132202

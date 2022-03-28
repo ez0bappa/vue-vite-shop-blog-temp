@@ -53,7 +53,7 @@
 
 <template>
     <div class="home-page">
-       <div class="navbar-block">
+       <div class="navbar-block1">
             <header>
                 <div class="logo">
                     <small><router-link to="/">Logo</router-link></small>
@@ -69,11 +69,14 @@
                     <div>
                         <router-link to="/register">Register</router-link>
                     </div>
+                    <div>
+                        <router-link to="/products">Products</router-link>
+                    </div>
                     <div class="cart-btn" style="padding: 7px;">
                         <button class="btn btn-outline-secondary" type="submit">
                             <router-link to="/cart">Cart</router-link>
-                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart.length }}</span>
-                    </button>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart.length }}</span>
+                        </button>
                     </div>
                     <div>
                         <!-- <div class="test-block" v-if="isLoggedIn">

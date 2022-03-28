@@ -1,19 +1,29 @@
 <script setup lang="ts">
+import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { onMounted } from "@vue/runtime-core"
 import { ref } from "vue";
+import { useRouter } from 'vue-router'
 
     const user = <any>ref('');
+    const router = useRouter();
 
     onMounted(() => {
-        
-        let userName = localStorage.getItem('user-info')
+        // let auth;
+        // auth = getAuth();
+        // onAuthStateChanged(auth, (user) => {
+        //     if(!user) {
+        //         router.push('/login')
+        //     }
+        // })
 
-        if(!userName) {
-            // @ts-ignore
-            window.location = "http://localhost:3000/register";
+
+        let user = localStorage.getItem('user-info')
+        console.log(user)
+        if(!user) {
+            router.push('/login')
         }
         // @ts-ignore
-        user.value = JSON.parse(userName).name
+        // user.value = JSON.parse(userName).name
     })
 </script>
 

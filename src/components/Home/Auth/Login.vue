@@ -12,17 +12,17 @@
     const formError = <any>ref('');
 
 
-    // const jsonServerSignIn = () => {
-    //     if(!email.value || !password.value) {
-    //         alert('All fields are required!...')
-    //         return false
-    //     } else {
-    //         login: store.login({
-    //             email: email.value,
-    //             password: password.value,
-    //         })
-    //     }
-    // }
+    const jsonServerSignIn = () => {
+        if(!email.value || !password.value) {
+            alert('All fields are required!...')
+            return false
+        } else {
+            login: store.login({
+                email: email.value,
+                password: password.value,
+            })
+        }
+    }
 
     const firebaseSignIn = () => {
         const auth = getAuth()          //from firebase auth
@@ -30,7 +30,7 @@
         if(email.value || password.value) {
             signInWithEmailAndPassword(auth, email.value, password.value)
             .then((data: any) => {
-                // localStorage.setItem("user-info", JSON.stringify(result.data))
+                localStorage.setItem("user-info", JSON.stringify(data.user))
                 router.push("/dashboard");
             })
             .catch((error: any) => {
@@ -94,7 +94,7 @@
                     <div class="row g-3 align-items-center mt-4">
                         <div class="col-md-12 text-center">
                             <router-link to="login">Login</router-link>
-                            <!-- <button type="submit" @click.prevent="jsonServerSignIn" class="btn btn-success ms-4">Login</button> -->
+                            <!-- <button type="submit" @click.prevent="jsonServerSignIn" class="btn btn-success ms-4">Json Server Login</button> -->
                             <button type="submit" @click.prevent="firebaseSignIn" class="btn btn-success ms-4">Firebase Login</button>
                         </div>
                     </div>
