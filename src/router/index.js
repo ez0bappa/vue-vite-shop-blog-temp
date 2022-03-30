@@ -4,6 +4,7 @@ import Shop from '../components/Home/Shop/Shop.vue';
 import Products from '../components/Home/Products/Products.vue';
 import ProductLists from '../components/Home/Products/ProductLists.vue';
 import AddProduct from '../components/Home/Products/AddProduct.vue';
+import Maps from '../components/Home/Products/Maps/Maps.vue';
 import Contact from '../components/Home/Contact/Contact.vue';
 import Register from '../components/Home/Auth/Register.vue';
 import Login from '../components/Home/Auth/Login.vue';
@@ -40,6 +41,11 @@ const routes = [
                 path: '/add-product',
                 name: 'AddProduct',
                 component: AddProduct,
+            },
+            {
+                path: '/locate-us',
+                name: 'Maps',
+                component: Maps,
             },
         ]
     },
