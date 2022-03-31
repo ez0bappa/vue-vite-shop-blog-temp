@@ -41,7 +41,7 @@
                     
                         <GoogleMap 
                             api-key="" 
-                            style="width: 100%; height: 500px" 
+                            style="width: 100%; height: 110vh" 
                             :center="center" 
                             :zoom="15"
                         >
@@ -116,7 +116,7 @@
 /* Map */
 .responsive-map{
     overflow: hidden;
-    padding-bottom:56.25%;
+    padding-bottom:39.25%;
     position:relative;
     height:0;
 }
