@@ -14,3 +14,5 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
 1. Vue 3 Google maps Components ( @fawmi/vue-google-maps )
     > https://www.npmjs.com/package/@fawmi/vue-google-maps
     > https://github.com/fawmi/vue-google-maps
+
+    > https://www.npmjs.com/package/vue3-google-map

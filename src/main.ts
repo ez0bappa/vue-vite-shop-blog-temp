@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { initializeApp } from 'firebase/app'
+// import  VueGoogleMaps from '@fawmi/vue-google-maps'
 
 /* code from our Firebase console */
 var firebaseConfig = {
@@ -30,4 +31,9 @@ createApp(App)
     .use(router)
     .use(VueToast)
     .component('fa', FontAwesomeIcon)
+    // .use(VueGoogleMaps, {
+    //     load: {
+    //         key: ""
+    //     }
+    // })
     .mount('#app')
