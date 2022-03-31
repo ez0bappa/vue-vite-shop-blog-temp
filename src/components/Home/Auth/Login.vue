@@ -1,18 +1,13 @@
 <script setup lang="ts">
     import { useUserStore } from '../../../store/User';
     import { ref } from 'vue';
-    import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-    import { useRouter } from 'vue-router'
 
-    const router = useRouter();
     const store = useUserStore();
 
     const email = <any>ref('');
     const password = <any>ref('');
-    const formError = <any>ref('');
 
-
-    const jsonServerSignIn = () => {
+    function login() {
         if(!email.value || !password.value) {
             alert('All fields are required!...')
             return false
@@ -23,41 +18,12 @@
             })
         }
     }
-
-    const firebaseSignIn = () => {
-        const auth = getAuth()          //from firebase auth
-
-        if(email.value || password.value) {
-            signInWithEmailAndPassword(auth, email.value, password.value)
-            .then((data: any) => {
-                localStorage.setItem("user-info", JSON.stringify(data.user))
-                router.push("/dashboard");
-            })
-            .catch((error: any) => {
-                switch(error.code) {
-                    case "auth/invalid-email":
-                        formError.value = "Invald Email";
-                        break;
-                    case "auth/user-not-found":
-                        formError.value = "User not found";
-                        break;
-                    case "auth/wrong-password":
-                        formError.value = "Incorrect password";
-                    default:
-                        formError.value = "Email or password was incorrect";
-                        break;
-                }
-            })   
-        } else {
-            formError.value = 'All fields are required!...'
-        }
-    }
 </script>
 
 <template>
     <div class="register mt-4">
         <div class="row">
-            <form>
+            <form @submit.prevent="login">
                 <h4 class="mb-4">Login</h4>
                 <div class="col-12">
                     <!-- Email -->
@@ -69,9 +35,9 @@
                             <input type="text" v-model="email" id="email" class="form-control">
                         </div>
                         <div class="col-4">
-                            <span id="emailHelpInline" class="form-text">
-                                <p v-if="formError">{{ formError }}</p>
-                            </span>
+                            <!-- <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span> -->
                         </div>
                     </div><br>
 
@@ -84,9 +50,9 @@
                             <input type="password" v-model="password" id="password" class="form-control">
                         </div>
                         <div class="col-4">
-                            <span id="emailHelpInline" class="form-text">
-                                <p v-if="passwordError">{{ passwordError }}</p>
-                            </span>
+                            <!-- <span id="passwordHelpInline" class="form-text">
+                                Must be 8-20 characters long.
+                            </span> -->
                         </div>
                     </div><br>
                     
@@ -94,8 +60,7 @@
                     <div class="row g-3 align-items-center mt-4">
                         <div class="col-md-12 text-center">
                             <router-link to="login">Login</router-link>
-                            <!-- <button type="submit" @click.prevent="jsonServerSignIn" class="btn btn-success ms-4">Json Server Login</button> -->
-                            <button type="submit" @click.prevent="firebaseSignIn" class="btn btn-success ms-4">Firebase Login</button>
+                            <button type="submit" class="btn btn-success ms-4">Login</button>
                         </div>
                     </div>
                     

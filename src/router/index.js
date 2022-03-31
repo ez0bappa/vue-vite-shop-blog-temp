@@ -13,8 +13,6 @@ import PhoneContacts from '../components/Home/Contact/PhoneContacts.vue';
 import About from '../components/Home/Contact/About.vue';
 import Cart from '../components/Home/Cart/Cart.vue';
 import PathNotFound from '../components/template/PathNotFound.vue';
-// import firebase from "firebase/app";
-import { getAuth } from "firebase/auth";
 
 const routes = [
     {
@@ -63,9 +61,6 @@ const routes = [
         path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard,
-        meta: {
-            requiresAuth: true
-        }
     },
     {
         path: '/contact',
@@ -76,9 +71,6 @@ const routes = [
                 path: '/phone-contacts',
                 name: 'PhoneContacts',
                 component: PhoneContacts,
-                meta: {
-                    requireAuth: true
-                }
             },
             {
                 path: '/about',
@@ -104,20 +96,5 @@ const router = createRouter({
     history: createWebHistory(),
     routes
 })
-
-router.beforeEach((to, from, next) => {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const authenticatedUser = user;
-    const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-    
-    if ( requiresAuth && ! authenticatedUser ) {
-        alert("You are not authorized to access this area.");
-        next("login");
-    }
-    else {
-        next();
-    }
-});
 
 export default router

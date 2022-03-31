@@ -22,20 +22,6 @@
       "email": "newbappa@gmail.com",
       "password": "12345",
       "confirmPassword": "12345"
-    },
-    {
-      "id": "_.tj1eto08",
-      "name": "sam",
-      "email": "sam@gmail.com",
-      "password": "12345",
-      "confirmPassword": "12345"
-    },
-    {
-      "id": "_.bd2207f3",
-      "name": "Test",
-      "email": "test@gmail.com",
-      "password": "12345",
-      "confirmPassword": "12345"
     }
   ]
 }

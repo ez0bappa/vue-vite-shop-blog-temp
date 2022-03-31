@@ -1,59 +1,26 @@
 <script setup lang="ts">
-    import { defineComponent, onMounted, ref } from 'vue';
+    import { defineComponent, onMounted } from 'vue';
     import { useCartStore } from '../../store/Cart.js';
     import { useUserStore } from '../../store/User.js'
     import { computed } from 'vue';
-    import { useRouter } from 'vue-router'
-    import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
-    const router = useRouter();
     const cartStore = useCartStore();
     const userStore = useUserStore();
-    const isLoggedIn = ref(false);
-    const authenticatedUser = ref('');
 
     let cart = computed(() => {
         return cartStore.$state.cart
     });
 
-    // @ts-ignore
-    let auth;
-    onMounted(() => {
-        auth = getAuth();
-        // @ts-ignore
-        onAuthStateChanged(auth, (user) => {
-            if(user) {
-                const auth = getAuth();
-                const user = auth.currentUser;
-                const authenticatedUser = user;
-                if(authenticatedUser) {
-                    console.log('home- ', authenticatedUser)
-                    isLoggedIn.value = true;
-                }
-            } else {
-                isLoggedIn.value = false;
-            }
-        })
-    })
-
-    const logout = () => {
+    function logout() {
         localStorage.clear();
-        router.push("/");
-    }
-
-    const handleSignOut = () => {
-        const auth = getAuth();
-        // @ts-ignore
-        signOut(auth).then(() => {
-            router.push('/login')
-        })
+        window.location = "http://localhost:3000/";
     }
     
 </script>
 
 <template>
     <div class="home-page">
-       <div class="navbar-block1">
+       <div class="navbar-block">
             <header>
                 <div class="logo">
                     <small><router-link to="/">Logo</router-link></small>
@@ -75,15 +42,11 @@
                     <div class="cart-btn" style="padding: 7px;">
                         <button class="btn btn-outline-secondary" type="submit">
                             <router-link to="/cart">Cart</router-link>
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart.length }}</span>
-                        </button>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{ cart.length }}</span>
+                    </button>
                     </div>
                     <div>
-                        <!-- <div class="test-block" v-if="isLoggedIn">
-                            <pre>{{ JSON.stringify(authenticatedUser, null, 2) }}</pre>
-                        </div> -->
-                        <button class="btn btn-primary mt-1" v-if="isLoggedIn" :onclick="logout">Logout</button>
-                        <button class="btn btn-primary mt-1" v-if="isLoggedIn" :onclick="handleSignOut">Firebase SignOut</button>
+                        <button class="btn btn-primary mt-1" :onclick="logout">Logout</button>
                     </div>
                 </nav>
                 <div class="black"></div>

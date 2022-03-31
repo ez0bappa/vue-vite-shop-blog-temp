@@ -1,20 +1,16 @@
 <script setup lang="ts">
     import { useUserStore } from '../../../store/User';
     import { onMounted, ref } from 'vue';
-    import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
-    import { useRouter } from 'vue-router'
-    import db from '../../../firebaseDb.js'
+    import { faL } from '@fortawesome/free-solid-svg-icons';
 
-    const router = useRouter();
     const store = useUserStore();
 
     const name = <any>ref('');
     const email = <any>ref('');
     const password = <any>ref('');
     const confirmPassword = <any>ref('');
-    const xhrRequest = <any>ref(false);
 
-    function jsonServersignUp() {
+    function signUp() {
         if(!name.value || !email.value || !password.value || !confirmPassword.value) {
             alert('All fields are required!...')
             return false
@@ -26,36 +22,15 @@
                 password: password.value,
                 confirmPassword: confirmPassword.value
             })
-
         }
-    }
-
-    const firebaseSignUp = () => {
-        // Insert data in authentication section in firebase
-        const auth  = getAuth();
-        createUserWithEmailAndPassword(auth, email.value, password.value)
-            .then((user: any) => {
-                var user: any = auth.currentUser;
-                console.log("Successfully registered!...", user)
-                router.push("/dashboard");
-            })
-            .catch((error: any) => {
-                console.log(error.code)
-                alert(`Error - ${error.message}`);
-            })
-
-        // Insert data inside a custom created collection in firebase
-        // console.log(db)
-    }
-
-    const gmailFirebaseSignUP = () => {
-        console.log('gmailFirebaseSignUP', createUserWithEmailAndPassword)
     }
     
     onMounted(() => {
         let user = localStorage.getItem('user-info')
+        console.log('Regster page', user)
         if(user) {
-            router.push('/dashboard');
+            // @ts-ignore
+            window.location = "http://localhost:3000/dashboard";
         }
     })
 </script>
@@ -63,7 +38,7 @@
 <template>
     <div class="register mt-4">
         <div class="row">
-            <form>
+            <form @submit.prevent="signUp">
                 <h4 class="mb-4">Regsiter</h4>
                 <div class="col-12">
                     <div class="row g-3 align-items-center">
@@ -128,15 +103,12 @@
                     <!-- Submit button -->
                     <div class="row g-3 align-items-center mt-4">
                         <div class="col-md-12 text-center">
-                            <div class="col-sm-12 form-froup">
-                                <router-link to="login">Login</router-link>
-                                <!-- <button type="button" class="btn btn-danger me-2 ms-5">Danger</button>
-                                <button type="submit" @click.prevent="jsonServersignUp" class="btn btn-success">Json Server Register</button> -->
-                                <button type="submit" @click.prevent="firebaseSignUp" class="btn btn-success ms-2">Firebase Register</button>
-                                <!-- <button type="submit" @click.prevent="gmailFirebaseSignUP" class="btn btn-success mt-2 ms-2">Gmail firebase Register</button> -->
-                            </div>
+                            <router-link to="login">Login</router-link>
+                            <button type="button" class="btn btn-danger me-2 ms-5">Danger</button>
+                            <button type="submit" class="btn btn-success">Success</button>
                         </div>
                     </div>
+                    
                 </div>
             </form>
         </div>
