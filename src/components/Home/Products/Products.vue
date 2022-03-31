@@ -67,8 +67,10 @@ import { onMounted } from "@vue/runtime-core";
                             <li class="nav-item">
                                 <router-link to="/add-product" class="nav-link">Add Product</router-link>
                             </li>
-                            <li class="nav-item">
-                                <router-link to="/locate-us" class="nav-link">Locate us</router-link>
+                            <li class="nav-item ">
+                                <span class="badge bg-primary">
+                                    <router-link to="/locate-us" class="nav-link">Locate us</router-link>
+                                </span>
                             </li>
                             <li class="nav-item">
                             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>

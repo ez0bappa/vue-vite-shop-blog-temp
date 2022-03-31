@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
     <div class="map">
         <h2>Map - Locate us</h2>
@@ -9,19 +5,17 @@
             <div class="col-lg-12 mx-auto">
                 <h5 class="font-weight-light mb-4 font-italic text-white">Underlined search bars with buttons</h5>
                 <div class="bg-white p-5 rounded shadow mb-3">
-
-                    <!-- Underlined search bars with buttons -->
                     <form>
                         <div class="row mb-4">
                             <div class="form-group col-md-9">
-                            <input id="exampleFormControlInput5" type="email" placeholder="What're you searching for?" class="form-control form-control-underlined">
+                                <input id="searchLocation" type="text" placeholder="Search location..." v-model="location" class="form-control form-control-underlined">
                             </div>
                             <div class="form-group col-md-3">
-                            <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
+                                <button type="submit" :disabled="!isLocationFilled" @click.prevent="submitLocationForm" class="btn btn-primary rounded-pill btn-block shadow w-75">Search</button>
                             </div>
+                            <div>{{ location }}</div>
                         </div>
                     </form>
-                    <!-- End -->
 
                 </div>
 
@@ -34,6 +28,18 @@
         </div>
     </div>
 </template>
+
+<script setup lang="ts">
+    import { computed, ref } from "vue";
+
+    const location = ref('')
+    const isLocationFilled = computed(() => location.value.length > 0)
+
+    function submitLocationForm() {
+        console.log(location.value)
+    }
+
+</script>
 
 <style scoped>
 .form-control::placeholder {
