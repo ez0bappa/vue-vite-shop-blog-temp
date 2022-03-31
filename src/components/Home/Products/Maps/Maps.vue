@@ -3,7 +3,7 @@
         <h2>Map - Locate us</h2>
         <div class="row mb-5">
             <div class="col-lg-12 mx-auto">
-                <h5 class="font-weight-light mb-4 font-italic text-white">Underlined search bars with buttons</h5>
+                <h5 class="font-weight-light mb-4 font-italic text-success">Locate shop locations...</h5>
                 <div class="bg-white p-5 rounded shadow mb-3">
                     <form>
                         <div class="row mb-4">
@@ -11,9 +11,15 @@
                                 <input id="searchLocation" type="text" placeholder="Search location..." v-model="location" class="form-control form-control-underlined">
                             </div>
                             <div class="form-group col-md-3">
-                                <button type="submit" :disabled="!isLocationFilled" @click.prevent="submitLocationForm" class="btn btn-primary rounded-pill btn-block shadow w-75">Search</button>
+                                <button 
+                                    type="submit" 
+                                    :disabled="!isLocationFilled" 
+                                    @click.prevent="submitLocationForm" 
+                                    class="rounded-pill btn-block shadow w-75"
+                                    :class="isLocationFilled ? 'btn btn-primary' : 'btn btn-secondary' "
+                                    >Search</button>
                             </div>
-                            <div>{{ location }}</div>
+                            <!-- <div>{{ location }}</div> -->
                         </div>
                     </form>
 
@@ -43,9 +49,10 @@
                             api-key="" 
                             style="width: 100%; height: 110vh" 
                             :center="center" 
-                            :zoom="15"
+                            :zoom="12"
                         >
-                            <Marker :options="{ position: center }" />
+                            <Marker :options="markerOptions" />
+                            <!-- <Marker :options="{ position: center }" /> -->
                         </GoogleMap>
                     </div>
                 </div>
@@ -55,12 +62,14 @@
 </template>
 
 <script setup lang="ts">
-    import { computed, reactive, ref } from "vue"
+    import { computed, onMounted, reactive, ref } from "vue"
     import { GoogleMap, Marker } from "vue3-google-map"
 
     const location = ref('')
-    const center = reactive({ lat: 51.093048, lng: 6.84212 })
-    const markerOptions = { position: center, label: "L", title: "LADY LIBERTY" };
+    // const center = reactive({ lat: 22.5726, lng: 88.3639 })
+    const center = { lat: 22.5726, lng: 88.3639 };
+    
+    const markerOptions = { position: center, label: "B", title: "Bappa Home" };
     const markers = [
                 {
                     position: {
@@ -92,6 +101,22 @@
     function submitLocationForm() {
         console.log(location.value)
     }
+
+    onMounted: {
+        geoLocation()
+    }
+
+    function geoLocation() {
+        console.log('on mounted')
+        navigator.geolocation.getCurrentPosition(position => {
+            console.log('latitude=>', position.coords.latitude, ' longitude=>' ,position.coords.longitude)
+        })
+
+        center.lat = 22.5958
+        center.lng = 88.2636
+        console.log(center.lat, center.lng)
+    }
+    
 
 </script>
 
