@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, defineAsyncComponent, ref } from 'vue'
 import { useProductStore } from '../../../store/Product'
-import Product from './Product.vue'
-import MiniCart from '../Cart/MiniCart.vue'
+// import Product from './Product.vue'
+// import MiniCart from '../Cart/MiniCart.vue'
 
 const store = useProductStore();
 
@@ -16,6 +16,15 @@ let searchedProducts = computed(() => {
     return products.value.filter((post: any) => {
         return post.name.toLowerCase().includes(search.value.toLowerCase())
     })
+})
+
+// Async components
+const ProductComponent = defineAsyncComponent(() => {
+    return import(/*webpackChunkName: 'Product component' */ './Product.vue')
+})
+
+const MiniCartComponent  = defineAsyncComponent(() => {
+    return import(/*webpackChunkName: 'MIniCart component' */ '../Cart/MiniCart.vue')
 })
 </script>
 
@@ -62,11 +71,11 @@ let searchedProducts = computed(() => {
                         <div class="row">
                             <div class="col-md-9 pt-5">
                                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-3">
-                                    <Product v-for="product in searchedProducts" :product="product" :key="product.id" />
+                                    <ProductComponent v-for="product in searchedProducts" :product="product" :key="product.id" />
                                 </div>
                             </div>
                             <div class="col-md-3 pt-5">
-                                <MiniCart />
+                                <MiniCartComponent />
                             </div>
                         </div>
                     </div>

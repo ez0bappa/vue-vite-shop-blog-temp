@@ -1,88 +1,81 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="product-listing">
-                        <section class="bg-primary text-center py-5">
-                            <img src="https://img.icons8.com/plasticine/100/000000/whole-fish.png"/>
-                            <h1 class="text-light">Waterfront Seafood</h1>      
-                        </section>
+    <div class="product-lists">
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-5 approved-products">
+                        <div class="product-listing">
+                            <section class="bg-secondary text-center">
+                                <h1 class="text-light">Approved<span class="product-store text-muted">(Product Store)</span></h1>      
+                            </section>
 
-                        <section class="my-3">
-                            <div class="container">
-                            <div class="row">
-                                <div class="col-lg-10 offset-lg-1">
-                                <div class="alert alert-primary text-center ">
-                                    Open Everyday from 12pm &bull; Bookings Essential &bull; BYO Wine
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </section>
-                        
-                        <section>
-                            <div class="container my-3">       
-                            <div class="row"> 
-                                <div class="col-lg-6 offset-lg-1">
-                                <ul class="list-group">
-                                    <li class="list-group-item pt-4">
-                                    <h5>Crispy Fish Burger <span class="badge bg-secondary">New</span></h5>
-                                    <p>Panko crumbed fish fillet, slaw &amp; our famous spicy sauce.<br/><span class="text-secondary">$10</span></p>
-                                    </li>   
-                                    <li class="list-group-item pt-4">
-                                    <h5>Salt &amp; Pepper Calamari</h5>
-                                    <p>Fresh fried calamari, lightly seasoned with salt &amp; pepper.<br/><span class="text-secondary">$12</span></p>
-                                    </li>   
-                                    <li class="list-group-item pt-4">
-                                    <h5>Fish of the Day</h5>
-                                    <p>Grilled fish of the day, garden salad &amp; served with chips.<br/><span class="text-secondary">$17</span></p>
-                                    </li>  
-                                    <li class="list-group-item pt-4">
-                                    <h5>Garlic Prawn Skewer</h5>
-                                    <p>Tiger prawns coated marinated in garlic served on a skewer.<br/><span class="text-secondary">$19</span></p>
-                                    </li> 
-                                    <li class="list-group-item pt-4">
-                                    <h5>Seafood Platter</h5>
-                                    <p>Single serve platter containing fish, prawns, oysters &amp; a glass of wine.<br/><span class="text-secondary">$25</span></p>
-                                    </li>              
-                                </ul>        
-                                </div>
-                                <div class="col-lg-4"> 
-                                <div class="card mb-5">
-                                    <div class="card-header">
-                                    Book Online
-                                    </div>
-                                    <div class="card-body">
-                                    <h5 class="card-title">Bookings are essential!</h5>
-                                    <p class="card-text">Don't miss out - book online to secure a table today.</p>
-                                    <a href="#" class="btn btn-primary">Check Availability</a>
-                                    </div>
-                                </div>
-                                <h6 class="font-weight-bold">Opening Hours</h6>
-                                <p>Monday – Sunday<br />8am – 4pm</p>          ‍
-                                <h6 class="font-weight-bold">Location</h6>
-                                <p>123 Beach Street<br/>Melbourne, Victoria 3000</p>          ‍
-                                <h6 class="font-weight-bold">Contact</h6>
-                                <p>T: <a href="#">07 1234 5678</a><br />E: <a href="#">info@waterfrontseafood.com</a></p>
-                                </div>
-                            </div>      
-                            </div>
-                        </section>
+                            <section class="table-lists">
+                                <ApprovedProducts />
+                            </section>
+                        </div>
                     </div>
+                    <div class="col-lg-6 un-approved-products">
+                        <div class="product-listing">
+                            <section class="bg-info text-center">
+                                <h1 class="text-light">Pending approval <span class="product-store text-muted">(Server data)</span></h1>      
+                            </section>
 
-
-
-                    <h1>Simple Sidebar</h1>
-                    <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                    <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                            <section class="table-lists">
+                                <UnApprovedProducts />
+                            </section>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </template>
+
+<script>
+    import ApprovedProducts from './ListsComponents/ApprovedProducts.vue'
+    import UnApprovedProducts from './ListsComponents/UnApprovedProducts.vue'
+
+    export default {
+        name: 'ProductLists',
+        components: {
+            ApprovedProducts,
+            UnApprovedProducts
+
+            // ApprovedProducts: () => import(/** */ './ListsComponents/ApprovedProducts.vue'),
+            // UnApprovedProducts: () => import('./ListsComponents/UnApprovedProducts')
+        }
+    }
+</script>
+
+<style scoped>
+@import url(https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css);
+span.product-store.text-muted {
+    color: #260c0e !important;
+    font-size: 24px;
+}
+
+/* Transfer to left arrow */
+.long-arrow-left{
+  display: block;
+  /* margin: 30px auto; */
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+}
+.long-arrow-left{
+ cursor: pointer;
+ transform: rotate(-45deg);
+}
+.long-arrow-left::after{
+    content: "";
+    display: block;
+    width: 2px;
+    height: 22px;
+    background-color: black;
+    transform: rotate(-45deg) translate(7px, 1px);
+    left: 0;
+    top: 0;
+}
+</style>

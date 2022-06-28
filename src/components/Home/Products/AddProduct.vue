@@ -1,11 +1,39 @@
-<script setup lang="ts">
+<script>
+    import { defineComponent } from '@vue/runtime-core'
+    import { v4 as uuidv4 } from 'uuid'
     import { useProductStore } from '../../../store/Product'
-    import { onMounted, ref } from 'vue';
-    import { useRouter } from 'vue-router'
 
-    const router = useRouter();
-    const store = useProductStore();
+    export default defineComponent({
+        data() {
+            return {
+                product: {
+                    id: '',
+                    name: '',
+                    price: '',
+                    shortdesc: '',
+                    url: '',
+                    status: false
+                }
+            }
+        },
+        setup() {
+            const store = useProductStore();
 
+            function insertProduct() {
+                const product = {
+                    uuid: uuidv4(),
+                    ...this.product,
+                }
+
+                store.addProduct(product)
+            }
+
+            return {
+                store,
+                insertProduct
+            }
+        }
+    })
 </script>
 
 <template>
@@ -18,7 +46,7 @@
                             <label for="name" class="col-form-label">Product name</label>
                         </div>
                         <div class="col-4">
-                            <input type="text" id="name" v-model="name" class="form-control" placeholder="Enter product name...">
+                            <input type="text" id="name" v-model="product.name" class="form-control" placeholder="Enter product name...">
                         </div>
                         <div class="col-4">
                             <span id="passwordHelpInline" class="form-text">
@@ -33,20 +61,20 @@
                             <label for="price" class="col-form-label">Product price</label>
                         </div>
                         <div class="col-4">
-                            <input type="text" id="name" v-model="price" class="form-control" placeholder="Enter price...">
+                            <input type="text" id="name" v-model="product.price" class="form-control" placeholder="Enter price...">
                         </div>
                         <div class="col-4">
                             
                         </div>
                     </div><br>
 
-                    <!-- Description -->
+                    <!-- Short Description -->
                     <div class="row g-3 align-items-center">
                         <div class="col-4 text-start">
-                            <label for="description" class="col-form-label">Description</label>
+                            <label for="description" class="col-form-label">Short Description</label>
                         </div>
                         <div class="col-4">
-                            <input type="textarea" v-model="description" class="form-control" placeholder="Enter description...">
+                            <input type="textarea" v-model="product.shortdesc" class="form-control" placeholder="Enter short description...">
                         </div>
                         <div class="col-4">
                             
@@ -68,8 +96,8 @@
 
 <style scoped>
 .add-product-section {
-    max-width: 80%;
-    margin: 125px auto !important;
+    /* max-width: 80%; */
+    /* margin: 125px auto !important; */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 1px 3px 5px rgba(0,0,0,0.1);

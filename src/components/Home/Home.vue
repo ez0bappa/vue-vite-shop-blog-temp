@@ -21,7 +21,7 @@
 <template>
     <div class="home-page">
        <div class="navbar-block">
-            <header>
+            <header class="test-header">
                 <div class="logo">
                     <small><router-link to="/">Logo</router-link></small>
                 </div>
@@ -37,7 +37,7 @@
                         <router-link to="/register">Register</router-link>
                     </div>
                     <div>
-                        <router-link to="/products">Products</router-link>
+                        <router-link to="/products-manager">Products</router-link>
                     </div>
                     <div class="cart-btn" style="padding: 7px;">
                         <button class="btn btn-outline-secondary" type="submit">

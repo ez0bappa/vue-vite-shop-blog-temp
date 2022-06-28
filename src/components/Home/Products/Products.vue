@@ -1,5 +1,8 @@
-<script setup lang="ts">
-import { onMounted } from "@vue/runtime-core";
+<script setup>
+    import { onMounted } from "@vue/runtime-core";
+    import TopMenu from '../../Home/Products/TopMenu.vue'
+    import SubHeaderNavMenu from '../Products/NavigationMenu/SubHeaderNavMenu.vue'
+    import LeftSideBar from '../../Home/Products/Sidebar/LeftSideBar.vue'
 
     onMounted: () => {
         $("#menu-toggle").click(function(e) {
@@ -11,84 +14,12 @@ import { onMounted } from "@vue/runtime-core";
 
 <template>
     <div class="products">
+        <LeftSideBar />
         <div id="wrapper">
-            <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <a href="#">
-                            Start Bootstrap
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="#">Shortcuts</a>
-                    </li>
-                    <li>
-                        <a href="#">Overview</a>
-                    </li>
-                    <li>
-                        <a href="#">Events</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /#sidebar-wrapper -->
-            <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="#">Bootstrap <span class="badge bg-primary">v5.1.1</span></a>
-                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-content">
-                        <div class="hamburger-toggle">
-                            <div class="hamburger">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            </div>
-                        </div>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbar-content">
-                        <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <router-link to="/product-lists" class="nav-link">Products Lists</router-link>
-                            </li>
-                            <li class="nav-item">
-                                <router-link to="/add-product" class="nav-link">Add Product</router-link>
-                            </li>
-                            <li class="nav-item ">
-                                <span class="badge bg-primary">
-                                    <router-link to="/locate-us" class="nav-link">Locate us</router-link>
-                                </span>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                            </li>
-                        </ul>
-                        <form class="d-flex ms-auto">
-                            <div class="input-group">
-                            <input class="form-control border-0 mr-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-primary border-0" type="submit">Search</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-            
-            <!-- Page Content -->
+            <SubHeaderNavMenu />
+
             <div id="page-content-wrapper">
-                <div class="container-fluid">
+                <div class="container-fluid" style="margin-left: 12%;">
                     <div class="row">
                         <div class="col-lg-12">
                             <router-view />
@@ -96,14 +27,11 @@ import { onMounted } from "@vue/runtime-core";
                     </div>
                 </div>
             </div>
-            <!-- /#page-content-wrapper -->
-
         </div>
     </div>
 </template>
 
 <style scoped>
-/* Sidebar Start */
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -146,7 +74,6 @@ import { onMounted } from "@vue/runtime-core";
     margin-right: -250px;
 }
 
-/* Sidebar Styles */
 
 .sidebar-nav {
     position: absolute;
@@ -196,7 +123,6 @@ import { onMounted } from "@vue/runtime-core";
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
     }
 
     #wrapper.toggled {
@@ -221,7 +147,6 @@ import { onMounted } from "@vue/runtime-core";
         margin-right: 0;
     }
 }
-/* Sidebar End */
 
 
 
@@ -238,7 +163,6 @@ import { onMounted } from "@vue/runtime-core";
 }
 .dropdown-menu.show {
   -webkit-animation: fadeIn 0.3s alternate;
-  /* Safari 4.0 - 8.0 */
   animation: fadeIn 0.3s alternate;
 }
 .nav-item.dropdown.dropdown-mega {
@@ -329,5 +253,4 @@ import { onMounted } from "@vue/runtime-core";
   color: white;
   text-shadow: 0 0 30px white;
 }
-
 </style>
