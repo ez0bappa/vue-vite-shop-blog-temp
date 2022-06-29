@@ -1,5 +1,6 @@
 <template>
   <div class="loop-data boxes">
+     <!-- <pre>Checkbox component - {{ JSON.stringify(checked, null, 2) }}</pre> -->
     <input
         @input="(event) => $emit('update:checked', event.target.checked)"
         type="checkbox"
@@ -35,6 +36,9 @@ export default {
       type: Boolean,
     },
   },
+  setup(props) {
+    // console.log('Checkbox component -', props.checked)
+  }
 };
 </script>
 

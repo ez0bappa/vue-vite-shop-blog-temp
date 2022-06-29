@@ -37,8 +37,8 @@
             </div>
 
             <div class="main-content mt-4">
-              <div class="text-gray-800 font-bold">Selected general Reasons:- {{ selectedGeneralReasons }}</div>
-              <div class="mt-2 text-gray-800 font-bold">General Lists options:- {{ generalOptionsLists }}</div>
+              <!-- <div class="text-gray-800 font-bold">Selected general Reasons:- {{ selectedGeneralReasons }}</div>
+              <div class="mt-2 text-gray-800 font-bold">General Lists options:- {{ generalOptionsLists }}</div> -->
               <MultiCheckbox
                 v-model:value="selectedGeneralReasons"
                 :generalOptionsLists="generalOptionsLists"
@@ -48,17 +48,18 @@
 
               <transition name="slide" type="animation">
                 <div class="toggle sub faulty text-start" v-if="checkFaultyIs">
-                <div class="text-gray-800 font-bold">Status - {{ checkFaultyIs }} : Selected Faulty Reasons:- {{ selectedFaultyReasons }}</div>
-                <div class="mt-2 text-gray-800 font-bold">Faulty Lists options:- {{ faultyOptionsLists }}</div>
+                <!-- <div class="text-gray-800 font-bold">Status - {{ checkFaultyIs }} : Selected Faulty Reasons:- {{ selectedFaultyReasons }}</div>
+                <div class="mt-2 text-gray-800 font-bold">Faulty Lists options:- {{ faultyOptionsLists }}</div> -->
                   <MultiCheckbox
                     v-model:value="selectedFaultyReasons"
-                    :generalOptionsLists="generalOptionsLists"
-                    :key="generalOptionsLists"
+                    :faultyOptionsLists="faultyOptionsLists"
+                    :key="faultyOptionsLists"
                     test="Faulty-reasons"
                   />
                 </div>
               </transition>
-
+              <div class="text-gray-800 font-bold">Selected General Reasons:- {{ selectedGeneralReasons }}</div>
+              <div class="mt-2 text-gray-800 font-bold">Selected Faulty Reasons:- {{ selectedFaultyReasons }}</div>
             </div>
           </div>
           <div class="modal-footer">
@@ -67,7 +68,7 @@
               buttonText="Cancel"
               data-dismiss="modal"
             />
-            <app-button :dark="false" buttonText="Save changes" />
+            <app-button :dark="false" buttonText="Save changes Test" />
           </div>
         </div>
       </div>
@@ -117,11 +118,10 @@ export default {
       if(isFaultyExists) {
         faultyOptionsLists.value = [
           { id: 6, value: "reason1", name: "Reason1" },
-          { id: 7, value: "reason2", name: "Reason" },
+          { id: 7, value: "reason2", name: "Reason2" },
           { id: 8, value: "reason3", name: "Reason3" },
           { id: 9, value: "reason4", name: "Reason4" },
         ]
-        console.log(12345, faultyOptionsLists.value)
       }
       return isFaultyExists;
     });
@@ -133,8 +133,9 @@ export default {
 
     return {
       selectedGeneralReasons,
-      selectedFaultyReasons,
       generalOptionsLists,
+      selectedFaultyReasons,
+      faultyOptionsLists,
       checkFaultyIs,
     };
   },

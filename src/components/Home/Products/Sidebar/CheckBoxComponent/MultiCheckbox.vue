@@ -2,7 +2,7 @@
   <div class="checkbox">
     <div class="boxes">
       <div v-if="generalOptionsLists">
-        <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre>
+        <!-- <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre> -->
         <!-- <div class="general" v-if="generalOptionsLists"><pre>comming from - {{ JSON.stringify(generalOptionsLists, null, 2) }}</pre></div> -->
         <check-box
           v-for="option in generalOptionsLists"
@@ -13,8 +13,9 @@
           :key="option"
         />
       </div>
-      <!-- <div v-if="faultyOptionsLists">
-        <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre>
+
+      <div v-if="faultyOptionsLists">
+        <!-- <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre> -->
         <check-box
           v-for="option in faultyOptionsLists"
           :checked="value.includes(option.id)"
@@ -23,7 +24,7 @@
           :label="option.name"
           :key="option"
         />
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -74,6 +75,7 @@ export default {
     // console.log("props general options: ", props.generalOptionsLists);
     const check = (optionId, checked) => {
       let updatedValue = [...props.value];
+      console.log(optionId, checked, updatedValue)
       if (checked) {
         updatedValue.push(optionId);
       } else {
