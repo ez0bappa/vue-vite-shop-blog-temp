@@ -37,7 +37,8 @@
             </div>
 
             <div class="main-content mt-4">
-              <!-- <CheckBox /> -->
+              <div class="mt-4 text-gray-800 font-bold">Selected Reasons:- {{ selectedGeneralReasons }}</div>
+              <div class="mt-4 text-gray-800 font-bold">General options:- {{ generalOptions }}</div>
               <MultiCheckbox
                 v-model:value="selectedGeneralReasons"
                 :generalOptions="generalOptions"
@@ -48,16 +49,14 @@
               <transition name="slide" type="animation">
                 <div class="toggle sub faulty text-start" v-if="checkFaultyIs">
                   <MultiCheckbox
-                    v-model:value="selectedGeneralReasons"
-                    :generalOptions="generalOptions"
+                    v-model:value="selectedFaultyReasons"
+                    :faultyOptions="faultyOptions"
                     :key="generalOptions"
                     test="Faulty-reasons"
                   />
                 </div>
               </transition>
 
-              <!-- <div class="mt-4 text-gray-800 font-bold">General Reasons:- {{ selectedGeneralReasons }}</div> -->
-              <!-- <div class="mt-4 text-gray-800 font-bold">Faulty Reasons:- {{ selectedFaultyReasons }}</div> -->
             </div>
           </div>
           <div class="modal-footer">
@@ -90,33 +89,27 @@ export default {
   setup() {
     let selectedGeneralReasons = ref([])
     let generalOptions = ref([])
-    let faultyOptions = ref([])
-    let selectedFaultyReasons = ref([])
 
+    let selectedFaultyReasons = ref([])
+    let faultyOptions = ref([])
+
+    // Check if any default general reasons - auto selected
     const defaultGeneralSelectedCheckbox = () => {
       selectedGeneralReasons.value = []
     };
 
+    // Lists of general reasons
     const generalReasonsOptions = () => {
       generalOptions.value = [
         { id: 1, value: "laravel", name: "Laravel" },
         { id: 2, value: "vuejs", name: "Vuejs" },
         { id: 3, value: "magento", name: "Magento" },
         { id: 4, value: "angularjs", name: "Angularjs" },
-        {
-          id: 5,
-          value: "faulty",
-          name: "Faulty",
-          data: [
-            { id: 1, value: "laravel", name: "Laravel" },
-            { id: 2, value: "vuejs", name: "Vuejs" },
-            { id: 3, value: "magento", name: "Magento" },
-            { id: 4, value: "angularjs", name: "Angularjs" },
-          ],
-        },
+        { id: 5, value: "faulty", name: "Faulty"},
       ];
     };
 
+    // Check if faulty is selected from main general reasons
     const checkFaultyIs = computed(() => {
       var isFaultyExists = selectedGeneralReasons.value.includes("faulty");
       faultyOptions.value = [

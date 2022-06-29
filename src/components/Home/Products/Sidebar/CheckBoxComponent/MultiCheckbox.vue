@@ -1,10 +1,11 @@
 <template>
   <div class="checkbox">
-    <!-- <pre>{{ JSON.stringify(generalOptions, null, 2) }}</pre> -->
-    <pre>{{ JSON.stringify(faultyOptions, null, 2) }}</pre>
+    <!-- <pre>{{ JSON.stringify(generalOptions, null, 2) }}</pre>
+    <pre>{{ JSON.stringify(faultyOptions, null, 2) }}</pre> -->
     <div class="boxes">
-      <div v-if="generalOptions">
+      <div>
         <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre>
+        <!-- <div class="general" v-if="generalOptions"><pre>comming from - {{ JSON.stringify(generalOptions, null, 2) }}</pre></div> -->
         <check-box
           v-for="option in generalOptions"
           :checked="value.includes(option.id)"
@@ -14,17 +15,17 @@
           :key="option"
         />
       </div>
-      <div v-if="faultyOptions">
+      <!-- <div v-if="faultyOptions">
         <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre>
-        <!-- <check-box
+        <check-box
           v-for="option in faultyOptions"
           :checked="value.includes(option.id)"
           @update:checked="check(option.value, $event)"
           :fieldId="option.name"
           :label="option.name"
           :key="option"
-        /> -->
-      </div>
+        />
+      </div> -->
     </div>
   </div>
 </template>
