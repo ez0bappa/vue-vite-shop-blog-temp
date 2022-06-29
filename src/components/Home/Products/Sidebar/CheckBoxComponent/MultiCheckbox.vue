@@ -2,26 +2,26 @@
   <div class="checkbox">
     <div class="boxes">
       <div v-if="generalOptionsLists">
-        <!-- <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre> -->
+        <pre>comming from 1 - {{ JSON.stringify(test, null, 2) }}</pre>
         <!-- <div class="general" v-if="generalOptionsLists"><pre>comming from - {{ JSON.stringify(generalOptionsLists, null, 2) }}</pre></div> -->
         <check-box
           v-for="option in generalOptionsLists"
           :checked="value.includes(option.id)"
           @update:checked="check(option.value, $event)"
-          :fieldId="option.name"
-          :label="option.name"
+          :fieldId="option.label"
+          :label="option.label"
           :key="option"
         />
       </div>
 
       <div v-if="faultyOptionsLists">
-        <!-- <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre> -->
+        <pre>comming from 2 - {{ JSON.stringify(test, null, 2) }}</pre>
         <check-box
           v-for="option in faultyOptionsLists"
           :checked="value.includes(option.id)"
           @update:checked="check(option.value, $event)"
-          :fieldId="option.name"
-          :label="option.name"
+          :fieldId="option.label"
+          :label="option.label"
           :key="option"
         />
       </div>
@@ -48,7 +48,7 @@ export default {
       required: true,
       validator: (value) => {
         const hasNameKey = value.every((option) =>
-          Object.keys(option).includes("name")
+          Object.keys(option).includes("label")
         );
         const hasIdKey = value.every((option) =>
           Object.keys(option).includes("id")
@@ -62,7 +62,7 @@ export default {
       required: true,
       validator: (value) => {
         const hasNameKey = value.every((option) =>
-          Object.keys(option).includes("name")
+          Object.keys(option).includes("label")
         );
         const hasIdKey = value.every((option) =>
           Object.keys(option).includes("id")

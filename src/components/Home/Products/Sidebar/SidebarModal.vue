@@ -104,11 +104,11 @@ export default {
     // Lists of general reasons
     const generalReasonsOptions = () => {
       generalOptionsLists.value = [
-        { id: 1, value: "laravel", name: "Laravel" },
-        { id: 2, value: "vuejs", name: "Vuejs" },
-        { id: 3, value: "magento", name: "Magento" },
-        { id: 4, value: "angularjs", name: "Angularjs" },
-        { id: 5, value: "faulty", name: "Faulty"},
+        { id: 1, value: "laravel", label: "Laravel" },
+        { id: 2, value: "vuejs", label: "Vuejs" },
+        { id: 3, value: "magento", label: "Magento" },
+        { id: 4, value: "angularjs", label: "Angularjs" },
+        { id: 5, value: "faulty", label: "Faulty"},
       ];
     };
 
@@ -117,10 +117,10 @@ export default {
       var isFaultyExists = selectedGeneralReasons.value.includes("faulty");
       if(isFaultyExists) {
         faultyOptionsLists.value = [
-          { id: 6, value: "reason1", name: "Reason1" },
-          { id: 7, value: "reason2", name: "Reason2" },
-          { id: 8, value: "reason3", name: "Reason3" },
-          { id: 9, value: "reason4", name: "Reason4" },
+          { id: 6, value: "reason1", label: "Reason1" },
+          { id: 7, value: "reason2", label: "Reason2" },
+          { id: 8, value: "reason3", label: "Reason3" },
+          { id: 9, value: "reason4", label: "Reason4" },
         ]
       }
       return isFaultyExists;
