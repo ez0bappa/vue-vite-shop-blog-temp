@@ -1,13 +1,11 @@
 <template>
   <div class="checkbox">
-    <!-- <pre>{{ JSON.stringify(generalOptions, null, 2) }}</pre>
-    <pre>{{ JSON.stringify(faultyOptions, null, 2) }}</pre> -->
     <div class="boxes">
-      <div>
+      <div v-if="generalOptionsLists">
         <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre>
-        <!-- <div class="general" v-if="generalOptions"><pre>comming from - {{ JSON.stringify(generalOptions, null, 2) }}</pre></div> -->
+        <!-- <div class="general" v-if="generalOptionsLists"><pre>comming from - {{ JSON.stringify(generalOptionsLists, null, 2) }}</pre></div> -->
         <check-box
-          v-for="option in generalOptions"
+          v-for="option in generalOptionsLists"
           :checked="value.includes(option.id)"
           @update:checked="check(option.value, $event)"
           :fieldId="option.name"
@@ -15,10 +13,10 @@
           :key="option"
         />
       </div>
-      <!-- <div v-if="faultyOptions">
+      <!-- <div v-if="faultyOptionsLists">
         <pre>comming from - {{ JSON.stringify(test, null, 2) }}</pre>
         <check-box
-          v-for="option in faultyOptions"
+          v-for="option in faultyOptionsLists"
           :checked="value.includes(option.id)"
           @update:checked="check(option.value, $event)"
           :fieldId="option.name"
@@ -44,7 +42,7 @@ export default {
       type: Array,
       required: true,
     },
-    generalOptions: {
+    generalOptionsLists: {
       type: Array,
       required: true,
       validator: (value) => {
@@ -58,7 +56,7 @@ export default {
         return hasNameKey && hasIdKey;
       },
     },
-    faultyOptions: {
+    faultyOptionsLists: {
       type: Array,
       required: true,
       validator: (value) => {
@@ -73,7 +71,7 @@ export default {
     },
   },
   setup(props, context) {
-    // console.log("props general options: ", props.generalOptions);
+    // console.log("props general options: ", props.generalOptionsLists);
     const check = (optionId, checked) => {
       let updatedValue = [...props.value];
       if (checked) {

@@ -37,21 +37,23 @@
             </div>
 
             <div class="main-content mt-4">
-              <div class="mt-4 text-gray-800 font-bold">Selected Reasons:- {{ selectedGeneralReasons }}</div>
-              <div class="mt-4 text-gray-800 font-bold">General options:- {{ generalOptions }}</div>
+              <div class="text-gray-800 font-bold">Selected general Reasons:- {{ selectedGeneralReasons }}</div>
+              <div class="mt-2 text-gray-800 font-bold">General Lists options:- {{ generalOptionsLists }}</div>
               <MultiCheckbox
                 v-model:value="selectedGeneralReasons"
-                :generalOptions="generalOptions"
-                :key="generalOptions"
+                :generalOptionsLists="generalOptionsLists"
+                :key="generalOptionsLists"
                 test="General-reasons"
               />
 
               <transition name="slide" type="animation">
                 <div class="toggle sub faulty text-start" v-if="checkFaultyIs">
+                <div class="text-gray-800 font-bold">Status - {{ checkFaultyIs }} : Selected Faulty Reasons:- {{ selectedFaultyReasons }}</div>
+                <div class="mt-2 text-gray-800 font-bold">Faulty Lists options:- {{ faultyOptionsLists }}</div>
                   <MultiCheckbox
                     v-model:value="selectedFaultyReasons"
-                    :faultyOptions="faultyOptions"
-                    :key="generalOptions"
+                    :generalOptionsLists="generalOptionsLists"
+                    :key="generalOptionsLists"
                     test="Faulty-reasons"
                   />
                 </div>
@@ -88,10 +90,10 @@ export default {
   },
   setup() {
     let selectedGeneralReasons = ref([])
-    let generalOptions = ref([])
+    let generalOptionsLists = ref([])
 
     let selectedFaultyReasons = ref([])
-    let faultyOptions = ref([])
+    let faultyOptionsLists = ref([])
 
     // Check if any default general reasons - auto selected
     const defaultGeneralSelectedCheckbox = () => {
@@ -100,7 +102,7 @@ export default {
 
     // Lists of general reasons
     const generalReasonsOptions = () => {
-      generalOptions.value = [
+      generalOptionsLists.value = [
         { id: 1, value: "laravel", name: "Laravel" },
         { id: 2, value: "vuejs", name: "Vuejs" },
         { id: 3, value: "magento", name: "Magento" },
@@ -112,13 +114,13 @@ export default {
     // Check if faulty is selected from main general reasons
     const checkFaultyIs = computed(() => {
       var isFaultyExists = selectedGeneralReasons.value.includes("faulty");
-      faultyOptions.value = [
-        { id: 1, value: "reason1", name: "Reason1" },
-        { id: 2, value: "reason2", name: "Reason" },
-        { id: 3, value: "reason3", name: "Reason3" },
-        { id: 4, value: "reason4", name: "Reason4" },
+      faultyOptionsLists.value = [
+        { id: 6, value: "reason1", name: "Reason1" },
+        { id: 7, value: "reason2", name: "Reason" },
+        { id: 8, value: "reason3", name: "Reason3" },
+        { id: 9, value: "reason4", name: "Reason4" },
       ]
-      console.log(12345, faultyOptions.value)
+      console.log(12345, faultyOptionsLists.value)
       return isFaultyExists;
     });
 
@@ -130,7 +132,7 @@ export default {
     return {
       selectedGeneralReasons,
       selectedFaultyReasons,
-      generalOptions,
+      generalOptionsLists,
       checkFaultyIs,
     };
   },
