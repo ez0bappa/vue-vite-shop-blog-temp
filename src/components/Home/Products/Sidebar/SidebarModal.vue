@@ -114,13 +114,15 @@ export default {
     // Check if faulty is selected from main general reasons
     const checkFaultyIs = computed(() => {
       var isFaultyExists = selectedGeneralReasons.value.includes("faulty");
-      faultyOptionsLists.value = [
-        { id: 6, value: "reason1", name: "Reason1" },
-        { id: 7, value: "reason2", name: "Reason" },
-        { id: 8, value: "reason3", name: "Reason3" },
-        { id: 9, value: "reason4", name: "Reason4" },
-      ]
-      console.log(12345, faultyOptionsLists.value)
+      if(isFaultyExists) {
+        faultyOptionsLists.value = [
+          { id: 6, value: "reason1", name: "Reason1" },
+          { id: 7, value: "reason2", name: "Reason" },
+          { id: 8, value: "reason3", name: "Reason3" },
+          { id: 9, value: "reason4", name: "Reason4" },
+        ]
+        console.log(12345, faultyOptionsLists.value)
+      }
       return isFaultyExists;
     });
 
