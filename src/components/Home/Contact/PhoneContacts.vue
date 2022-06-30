@@ -22,14 +22,14 @@
       })
     }
 
-    onMounted(() => {
-        let user = localStorage.getItem('user-info')
+    // onMounted(() => {
+    //     let user = localStorage.getItem('user-info')
 
-        if(!user) {
-            // @ts-ignore
-            window.location = "http://localhost:3000/login";
-        }
-    })
+    //     if(!user) {
+    //         // @ts-ignore
+    //         window.location = "http://localhost:3000/login";
+    //     }
+    // })
 </script>
 
 <template>

@@ -1,12 +1,22 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, ref } from 'vue'
 import { useProductStore } from '../../../store/Product'
+import { useRouter } from 'vue-router'
+import maintainanceReturn from '../../../services/MaintanceMode.js'
 // import Product from './Product.vue'
 // import MiniCart from '../Cart/MiniCart.vue'
 
+const router = useRouter()
 const store = useProductStore();
 
 const search = ref('');
+
+if(maintainanceReturn.MaintainanceMode()) {
+    console.log('we are in maintaince')
+    router.push('/maintainance-page')
+} else {
+    console.log('Normal mode')
+}
 
 let products = computed(() => {
     return store.$state.products

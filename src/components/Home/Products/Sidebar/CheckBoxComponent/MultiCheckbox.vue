@@ -75,12 +75,14 @@ export default {
     // console.log("props general options: ", props.generalOptionsLists);
     const check = (optionId, checked) => {
       let updatedValue = [...props.value];
+      console.log(updatedValue)
       console.log(optionId, checked, updatedValue)
       if (checked) {
         updatedValue.push(optionId);
       } else {
         updatedValue.splice(updatedValue.indexOf(optionId), 1);
       }
+      
       context.emit("update:value", updatedValue);
     };
 

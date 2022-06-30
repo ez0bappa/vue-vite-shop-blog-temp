@@ -37,8 +37,9 @@
             </div>
 
             <div class="main-content mt-4">
-              <!-- <div class="text-gray-800 font-bold">Selected general Reasons:- {{ selectedGeneralReasons }}</div>
-              <div class="mt-2 text-gray-800 font-bold">General Lists options:- {{ generalOptionsLists }}</div> -->
+              <BootstrapAccordianCheckBox />
+
+
               <MultiCheckbox
                 v-model:value="selectedGeneralReasons"
                 :generalOptionsLists="generalOptionsLists"
@@ -48,8 +49,6 @@
 
               <transition name="slide" type="animation">
                 <div class="toggle sub faulty text-start" v-if="checkFaultyIs">
-                <!-- <div class="text-gray-800 font-bold">Status - {{ checkFaultyIs }} : Selected Faulty Reasons:- {{ selectedFaultyReasons }}</div>
-                <div class="mt-2 text-gray-800 font-bold">Faulty Lists options:- {{ faultyOptionsLists }}</div> -->
                   <MultiCheckbox
                     v-model:value="selectedFaultyReasons"
                     :faultyOptionsLists="faultyOptionsLists"
@@ -79,6 +78,7 @@
 <script>
 import { computed } from "vue";
 // import CheckBox from './CheckBoxComponent/Checkbox1.vue'
+// import BootstrapAccordianCheckBox from './CheckBoxComponent/BootstrapAccordianCheckBox.vue'
 import AppButton from "../../../SharedComponent/Button/Button.vue"
 import MultiCheckbox from "./CheckBoxComponent/MultiCheckbox.vue"
 import { ref, onMounted } from "vue";
@@ -88,6 +88,7 @@ export default {
   components: {
     AppButton,
     MultiCheckbox,
+    // BootstrapAccordianCheckBox
   },
   setup() {
     let selectedGeneralReasons = ref([])
@@ -100,6 +101,11 @@ export default {
     const defaultGeneralSelectedCheckbox = () => {
       selectedGeneralReasons.value = []
     };
+
+    // Check if any default faulty option auto selected
+    const defaultFaultySelectedCheckbox = () => {
+      selectedFaultyReasons.value = []
+    }
 
     // Lists of general reasons
     const generalReasonsOptions = () => {
@@ -129,6 +135,7 @@ export default {
     onMounted(() => {
       generalReasonsOptions();
       defaultGeneralSelectedCheckbox();
+      defaultFaultySelectedCheckbox();
     });
 
     return {

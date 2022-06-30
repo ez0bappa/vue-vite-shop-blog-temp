@@ -27,7 +27,7 @@
     
     onMounted(() => {
         let user = localStorage.getItem('user-info')
-        console.log('Regster page', user)
+        // console.log('Regster page', user)
         if(user) {
             // @ts-ignore
             window.location = "http://localhost:3000/dashboard";

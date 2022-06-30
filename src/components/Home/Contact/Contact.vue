@@ -1,7 +1,18 @@
 <script setup lang="ts">
     import { ref } from 'vue'
+    import { useRouter } from 'vue-router'
+    import maintainanceReturn from '../../../services/MaintanceMode.js'
 
     const isOpen = ref(false)
+
+    const router = useRouter()
+
+    if(maintainanceReturn.MaintainanceMode()) {
+        console.log('we are in maintaince')
+        router.push('/maintainance-page')
+    } else {
+        console.log('Normal mode')
+    }
 
 </script>
 

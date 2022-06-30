@@ -3,9 +3,19 @@
     import { useCartStore } from '../../store/Cart.js';
     import { useUserStore } from '../../store/User.js'
     import { computed } from 'vue';
+    import { useRouter } from 'vue-router'
+    import maintainanceReturn from '../../services/MaintanceMode.js'
 
+    const router = useRouter()
     const cartStore = useCartStore();
     const userStore = useUserStore();
+
+    if(maintainanceReturn.MaintainanceMode()) {
+        console.log('we are in maintaince')
+        router.push('/maintainance-page')
+    } else {
+        console.log('Normal mode')
+    }
 
     let cart = computed(() => {
         return cartStore.$state.cart
@@ -27,6 +37,9 @@
                 </div>
                 <i class="material-icons">=</i>
                 <nav>
+                    <!-- <div>
+                        <router-link to="/maintainance-page">Maintainance</router-link>
+                    </div> -->
                     <div>
                         <router-link to="/shop">Shop</router-link>
                     </div>
